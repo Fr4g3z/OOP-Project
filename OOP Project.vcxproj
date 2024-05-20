@@ -130,7 +130,7 @@
     <ClCompile Include="OOP Project.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Gardening_Equipment.h" />
+    <ClInclude Include="Pesticides.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
