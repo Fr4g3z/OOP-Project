@@ -26,5 +26,8 @@
     <ClInclude Include="Pesticides.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Plants.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
