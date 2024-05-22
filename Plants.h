@@ -42,11 +42,33 @@ public:
 		double temp = disease_level + random_double();
 		if (temp <= 100) { disease_level = temp; }
 	}
-	~Plants() {}
+	virtual void interact() const = 0;
+	virtual ~Plants() {}
 };
 
 class Trees : public Plants {
 public:
 	Trees(std::string _name = "") : Plants (_name, "Fungal diseases") {}
+	void interact() const override {
+		std::cout << "You feel massive " << name << " bark" << std::endl;
+	}
 	~Trees() {}
+};
+
+class Grass : public Plants {
+public:
+	Grass(std::string _name = "") : Plants(_name, "Weeds") {}
+	void interact() const override {
+		std::cout << "You run your hand along " << name << "'s stems" << std::endl;
+	}
+	~Grass() {}
+};
+
+class Flower : public Plants {
+public:
+	Flower(std::string _name = "") : Plants(_name, "Insects") {}
+	void interact() const override {
+		std::cout << "You inhale the wonderful aroma of " << name << std::endl;
+	}
+	~Flower() {}
 };

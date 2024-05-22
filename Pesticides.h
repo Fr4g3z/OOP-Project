@@ -46,7 +46,7 @@ public:
 	void apply(Plants* plant) const override {
 		if (plant->getDisease() == target) {
 			double new_dis_level = plant->getDiseaseLevel() - plant->getDiseaseLevel() * effectiveness;
-			std::cout << application_type << " " << name << " decreased amount of unwanted " << target << " from " << plant->getDiseaseLevel() << "% to " << new_dis_level << "%" << std::endl;
+			std::cout << application_type << " " << name << " decreased amount of unwanted " << target << " of " << plant->getName() << " from " << plant->getDiseaseLevel() << "% to " << new_dis_level << "%" << std::endl;
 			plant->setDiseaseLevel(new_dis_level);
 		}
 		else {
@@ -61,7 +61,7 @@ public:
 	void apply(Plants* plant) const override {
 		if (plant->getDisease() == target) {
 			double new_dis_level = plant->getDiseaseLevel() - plant->getDiseaseLevel() * effectiveness;
-			std::cout << application_type << " " << name << " decreased amount of unwanted " << target << " from " << plant->getDiseaseLevel() << "% to " << new_dis_level << "%" << std::endl;
+			std::cout << application_type << " " << name << " decreased amount of unwanted " << target << " of "<< plant->getName() << " from " << plant->getDiseaseLevel() << "% to " << new_dis_level << "%" << std::endl;
 			plant->setDiseaseLevel(new_dis_level);
 		}
 		else {
@@ -76,7 +76,7 @@ public:
 	void apply(Plants* plant) const override {
 		if (plant->getDisease() == target) {
 			double new_dis_level = plant->getDiseaseLevel() - plant->getDiseaseLevel() * effectiveness;
-			std::cout << application_type << " " << name << " decreased amount of unwanted " << target << " from " << plant->getDiseaseLevel() << "% to " << new_dis_level << "%" << std::endl;
+			std::cout << application_type << " " << name << " decreased amount of unwanted " << target << " of " << plant->getName() << " from " << plant->getDiseaseLevel() << "% to " << new_dis_level << "%" << std::endl;
 			plant->setDiseaseLevel(new_dis_level);
 
 		}
