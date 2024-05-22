@@ -4,25 +4,26 @@
 #include "Plants.h"
 
 inline static void test() {
-	Plants* p = new Trees("Oak");
+	Plants* t = new Trees("Oak");
 	Plants* g = new Grass("Wheat");
 	Plants* f = new Flower("Rosa");
-	p->gain_disease();
+	t->gain_disease();
 	g->gain_disease();
 	f->gain_disease();
-	p->displayInfo();
+	t->displayInfo();
 	g->displayInfo();
 	f->displayInfo();
-	Herbicide herbicide("herbicide");
-	herbicide.apply(g);
+	Herbicide h("herbicide");
+	Insecticide i("ins");
+	Fungicide fu("fung");
+	h.apply(g);
+	i.apply(f);
+	fu.apply(t);
+	t->displayInfo();
+	g->displayInfo();
+	f->displayInfo();
 
-	Insecticide insect("ins");
-	insect.apply(f);
-
-	Fungicide fungi("fung");
-	fungi.apply(p);
-
-	p->interact();
-	g->interact();
-	f->interact();
+	std::vector<std::string> vec = f->getTraps();
+	std::cout << "Traps: ";
+	display_vector(vec);
 }

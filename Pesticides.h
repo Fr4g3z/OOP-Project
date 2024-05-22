@@ -7,13 +7,12 @@ class Pesticides {
 protected:
 	std::string name;
 	std::string target;
-	std::string application_type;
 	double effectiveness;
 public:
 	//Constructors
-	Pesticides(): name(), target(), application_type(), effectiveness() {}
-	Pesticides(std::string _name, std::string _target, std::string _application_type, double _effectiveness) :
-		name(_name), target(_target), application_type(_application_type), effectiveness(_effectiveness) {}
+	Pesticides(): name(), target(), effectiveness() {}
+	Pesticides(std::string _name, std::string _target, double _effectiveness) :
+		name(_name), target(_target), effectiveness(_effectiveness) {}
 
 	//Setters and getters
 	void setName(std::string _name) { name = _name; }
@@ -22,9 +21,6 @@ public:
 	void setTarget(std::string _target) { target = _target; }
 	std::string getTarget() const { return target; }
 
-	void setApplicationType(std::string _application_type) { application_type = _application_type; }
-	std::string getApplicationType() const { return application_type; }
-
 	void setEffectiveness(double _effectiveness) { effectiveness = _effectiveness; }
 	double getEffectiveness() const { return effectiveness; }
 
@@ -32,53 +28,63 @@ public:
 	void displayInfo() {
 		std::cout << std::endl << "Name: " << getName() << std::endl;
 		std::cout << "Target: " << getTarget() << std::endl;
-		std::cout << "Application Type: " << getApplicationType() << std::endl;
 		std::cout << "Effectiveness: " << getEffectiveness() * 100 << "%" << std::endl;
 	}
 
-	virtual void apply(Plants* plant) const = 0;
+	virtual void apply(Plants* plant) = 0;
 	virtual ~Pesticides() {}
 };
 
 class Herbicide : public Pesticides {
 public:
-	Herbicide(std::string _name) : Pesticides(_name, "Weeds", "Spraying", 0.90) {}
-	void apply(Plants* plant) const override {
+	Herbicide(std::string _name) : Pesticides(_name, "Weeds", 0.90) {}
+	void spray(Plants* plant) {
+		std::cout << name << " sprayed over all leaves of " << plant->getName() << std::endl;
+	}
+	void apply(Plants* plant) override {
 		if (plant->getDisease() == target) {
+			spray(plant);
 			double new_dis_level = plant->getDiseaseLevel() - plant->getDiseaseLevel() * effectiveness;
-			std::cout << application_type << " " << name << " decreased amount of unwanted " << target << " of " << plant->getName() << " from " << plant->getDiseaseLevel() << "% to " << new_dis_level << "%" << std::endl;
 			plant->setDiseaseLevel(new_dis_level);
 		}
 		else {
-			std::cout << "Wrong type of plant!" << std::endl;
+			std::cout << "Nothing happened" << std::endl;
 		}
 	}
 };
 
 class Insecticide : public Pesticides {
 public:
-	Insecticide(std::string _name) : Pesticides(_name, "Insects", "Baiting", 0.97) {}
-	void apply(Plants* plant) const override {
+	Insecticide(std::string _name) : Pesticides(_name, "Insects", 0.97) {}
+	void bait(Plants* plant) {
+		plant->appendTrap("Granular fly bait");
+		std::cout << "Fly bait was put to "<< plant->getName() << std::endl;
+	}
+	void apply(Plants* plant) override {
 		if (plant->getDisease() == target) {
+			bait(plant);
 			double new_dis_level = plant->getDiseaseLevel() - plant->getDiseaseLevel() * effectiveness;
-			std::cout << application_type << " " << name << " decreased amount of unwanted " << target << " of "<< plant->getName() << " from " << plant->getDiseaseLevel() << "% to " << new_dis_level << "%" << std::endl;
 			plant->setDiseaseLevel(new_dis_level);
 		}
 		else {
-			std::cout << "Wrong type of plant!" << std::endl;
+			std::cout << "Nothing happened" << std::endl;
 		}
 	}
 };
 
 class Fungicide : public Pesticides {
 public:
-	Fungicide(std::string _name) : Pesticides(_name, "Fungal diseases", "Soil drenching", 0.99) {}
-	void apply(Plants* plant) const override {
+	Fungicide(std::string _name) : Pesticides(_name, "Fungal diseases", 0.99) {}
+	void soil_drench(Plants* plant){
+		std::string new_soil = "Phosphorous Acid drenched " + plant->getSoil();
+		std::cout << "Soil of " << plant->getName() << " was drenched with Phosphorous Acid" << std::endl;
+		plant->setSoil(new_soil);
+	}
+	void apply(Plants* plant) override {
 		if (plant->getDisease() == target) {
+			soil_drench(plant);
 			double new_dis_level = plant->getDiseaseLevel() - plant->getDiseaseLevel() * effectiveness;
-			std::cout << application_type << " " << name << " decreased amount of unwanted " << target << " of " << plant->getName() << " from " << plant->getDiseaseLevel() << "% to " << new_dis_level << "%" << std::endl;
 			plant->setDiseaseLevel(new_dis_level);
-
 		}
 		else {
 			std::cout << "Nothing happened" << std::endl;
