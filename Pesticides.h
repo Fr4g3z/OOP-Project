@@ -39,6 +39,11 @@ class Herbicide : public Pesticides {
 public:
 	Herbicide(std::string _name) : Pesticides(_name, "Weeds", 0.90) {}
 	void spray(Plants* plant) {
+		std::vector<std::string> temp;
+		for (int i = 0; i < plant->getLeaves().size(); i++) {
+			temp.push_back("Sprayed " + plant->getLeaf(i));
+		}
+		plant->setLeaves(temp);
 		std::cout << name << " sprayed over all leaves of " << plant->getName() << std::endl;
 	}
 	void apply(Plants* plant) override {

@@ -26,4 +26,6 @@ inline static void test() {
 	std::vector<std::string> vec = f->getTraps();
 	std::cout << "Traps: ";
 	display_vector(vec);
+	vec = g->getLeaves();
+	display_vector(vec);
 }

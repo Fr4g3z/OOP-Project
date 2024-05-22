@@ -45,6 +45,7 @@ public:
 
 	void setLeaves(std::vector<std::string> _leaves) { leaves = _leaves; }
 	std::vector <std::string> getLeaves() const { return leaves; }
+	std::string getLeaf(int i) { return leaves[i]; }
 	void appendLeaves(std::string _leaf) { leaves.push_back(_leaf); }
 	void popLeaves() { leaves.pop_back(); }
 
