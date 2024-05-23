@@ -14,7 +14,7 @@ inline static double random_double() {
 
 inline static void display_vector(std::vector<std::string>& vec) {
 	for (auto& i : vec) {
-		std::cout << i << " ";
+		std::cout << i << "; ";
 	}
 	std::cout << std::endl;
 }
@@ -51,6 +51,7 @@ public:
 
 	void setTraps(std::vector<std::string> _traps) { traps = _traps; }
 	std::vector<std::string> getTraps() const { return traps; }
+	std::string getTrap(int i) { return traps[i]; }
 	void appendTrap(std::string _leaf) { traps.push_back(_leaf); }
 	void popTrap() { traps.pop_back(); }
 

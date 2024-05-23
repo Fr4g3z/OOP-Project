@@ -31,7 +31,7 @@ public:
 		std::cout << "Effectiveness: " << getEffectiveness() * 100 << "%" << std::endl;
 	}
 
-	virtual void apply(Plants* plant) = 0;
+	virtual std::string apply(Plants* plant) = 0;
 	virtual ~Pesticides() {}
 };
 
@@ -44,16 +44,19 @@ public:
 			temp.push_back("Sprayed " + plant->getLeaf(i));
 		}
 		plant->setLeaves(temp);
-		std::cout << name << " sprayed over all leaves of " << plant->getName() << std::endl;
 	}
-	void apply(Plants* plant) override {
+	std::string apply(Plants* plant) override {
+		std::string output;
 		if (plant->getDisease() == target) {
 			spray(plant);
 			double new_dis_level = plant->getDiseaseLevel() - plant->getDiseaseLevel() * effectiveness;
 			plant->setDiseaseLevel(new_dis_level);
+			output = name + " sprayed over all leaves of " + plant->getName() + "\n";
+			return output;
 		}
 		else {
-			std::cout << "Nothing happened" << std::endl;
+			output = "Nothing happened\n";
+			return output;
 		}
 	}
 };
@@ -63,16 +66,19 @@ public:
 	Insecticide(std::string _name) : Pesticides(_name, "Insects", 0.97) {}
 	void bait(Plants* plant) {
 		plant->appendTrap("Granular fly bait");
-		std::cout << "Fly bait was put to "<< plant->getName() << std::endl;
 	}
-	void apply(Plants* plant) override {
+	std::string apply(Plants* plant) override {
+		std::string output;
 		if (plant->getDisease() == target) {
 			bait(plant);
 			double new_dis_level = plant->getDiseaseLevel() - plant->getDiseaseLevel() * effectiveness;
 			plant->setDiseaseLevel(new_dis_level);
+			output = "Fly bait was put to " + plant->getName() + "\n";
+			return output;
 		}
 		else {
-			std::cout << "Nothing happened" << std::endl;
+			output = "Nothing happened\n";
+			return output;
 		}
 	}
 };
@@ -82,17 +88,20 @@ public:
 	Fungicide(std::string _name) : Pesticides(_name, "Fungal diseases", 0.99) {}
 	void soil_drench(Plants* plant){
 		std::string new_soil = "Phosphorous Acid drenched " + plant->getSoil();
-		std::cout << "Soil of " << plant->getName() << " was drenched with Phosphorous Acid" << std::endl;
 		plant->setSoil(new_soil);
 	}
-	void apply(Plants* plant) override {
+	std::string apply(Plants* plant) override {
+		std::string output;
 		if (plant->getDisease() == target) {
 			soil_drench(plant);
 			double new_dis_level = plant->getDiseaseLevel() - plant->getDiseaseLevel() * effectiveness;
 			plant->setDiseaseLevel(new_dis_level);
+			output = "Soil of " + plant->getName() + " was drenched with Phosphorous Acid" + "\n";
+			return output;
 		}
 		else {
-			std::cout << "Nothing happened" << std::endl;
+			output = "Nothing happened\n";
+			return output;
 		}
 	}
 };

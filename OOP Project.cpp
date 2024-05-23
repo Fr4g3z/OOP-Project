@@ -6,7 +6,9 @@
 
 int main()
 {
-    test();
+    treeTest();
+    grassTest();
+    flowerTest();
     return 0;
 }
 
